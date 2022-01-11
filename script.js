@@ -7,34 +7,46 @@
 //players -> factories
 
 const player = (name, mark) => {
-    const getName = () => name;
-    return {getName, mark}
+    return {name, mark}
 };
-
-const game = (() => {
-    const player1 = player("Juan", "x")
-    const player2 = player("Maria", "o")
-    console.log(player1.name, player1.mark)
-})();
 
 const gameboard = (() => {
     const array = ["", "", "", "", "", "", "", "", ""]; 
-    array[0] = "o";
+    
+    const boardPositions = document.querySelectorAll('.game-positions')
+
     return {
-        array
+        array,
+        boardPositions
     };
 
 })();
 
+console.log(gameboard.array)
+//display: mostrar o dejar de mostrar cosas
 const displayController = (() => {
-    const positions = document.querySelectorAll('.game-positions')
-    positions.forEach(element => {
-        element.addEventListener('click', () => {
-           element.innerHTML = gameboard.array[element.dataset.position];
-        })
+    //mostrar tablero de juego
+    const submitButton = document.getElementById('submit-button')
+    submitButton.addEventListener('click', function() {
+        const gameboard = document.getElementById('gameboard');
+        const gameStart = document.getElementById('game-start')
+        gameboard.style.display = 'grid';
+        gameStart.style.display = 'none';
     })
+    //mostrar las posiciones de los jugadores
+    
+    gameboard.boardPositions.forEach(element => {  
+            element.addEventListener('click', function (){
+                element.innerHTML = gameboard.array[element.dataset.position]
+            });
+        })
 })();
-//[element.dataset.position]
+
+
+const game = (() => {
+    
+})();
+
 
 
 
